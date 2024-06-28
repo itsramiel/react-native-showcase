@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { Spec } from './NativeShowcase';
 
 const LINKING_ERROR =
   `The package 'react-native-showcase' doesn't seem to be linked. Make sure: \n\n` +
@@ -13,7 +14,7 @@ const ShowcaseModule = isTurboModuleEnabled
   ? require('./NativeShowcase').default
   : NativeModules.Showcase;
 
-const Showcase = ShowcaseModule
+const Showcase: Spec = ShowcaseModule
   ? ShowcaseModule
   : new Proxy(
       {},
@@ -24,6 +25,10 @@ const Showcase = ShowcaseModule
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Showcase.multiply(a, b);
-}
+export const {
+  getOBject,
+  getNumbers,
+  callMeLater,
+  promiseNumber,
+  reverseString,
+} = Showcase;

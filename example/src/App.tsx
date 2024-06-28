@@ -1,18 +1,50 @@
-import * as React from 'react';
-
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-showcase';
+import { StyleSheet, View, Button } from 'react-native';
+import {
+  reverseString,
+  promiseNumber,
+  callMeLater,
+  getNumbers,
+  getOBject,
+} from 'react-native-showcase';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button
+        title="reverse string"
+        onPress={() => {
+          console.log(reverseString('reverse string'));
+        }}
+      />
+      <Button
+        title="get number"
+        onPress={() => {
+          console.log(getNumbers());
+        }}
+      />
+      <Button
+        title="get object"
+        onPress={() => {
+          console.log(getOBject());
+        }}
+      />
+      <Button
+        title="promise"
+        onPress={async () => {
+          const value = await promiseNumber(5);
+
+          console.log('promised value is: ', value);
+        }}
+      />
+      <Button
+        title="callbacks"
+        onPress={() => {
+          callMeLater(
+            () => console.log('success'),
+            () => console.log('failure')
+          );
+        }}
+      />
     </View>
   );
 }
@@ -22,6 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
   },
   box: {
     width: 60,
