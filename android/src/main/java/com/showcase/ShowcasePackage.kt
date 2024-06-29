@@ -9,7 +9,7 @@ import java.util.HashMap
 
 class ShowcasePackage : TurboReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-    return if (name == ShowcaseModule.NAME) {
+    return if (name == ShowcaseModuleImpl.NAME) {
       ShowcaseModule(reactContext)
     } else {
       null
@@ -20,12 +20,11 @@ class ShowcasePackage : TurboReactPackage() {
     return ReactModuleInfoProvider {
       val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
       val isTurboModule: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
-      moduleInfos[ShowcaseModule.NAME] = ReactModuleInfo(
-        ShowcaseModule.NAME,
-        ShowcaseModule.NAME,
+      moduleInfos[ShowcaseModuleImpl.NAME] = ReactModuleInfo(
+        ShowcaseModuleImpl.NAME,
+        ShowcaseModuleImpl.NAME,
         false,  // canOverrideExistingModule
         false,  // needsEagerInit
-        true,  // hasConstants
         false,  // isCxxModule
         isTurboModule // isTurboModule
       )
